@@ -2,9 +2,13 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
+import { Link } from "react-router-dom";
+import ArticleCard from "../../components/articlecard";
+import Note from "./Note.js";
+import notes from "./Notes.js";
 
 class Dashboard extends Component {
-  onLogoutClick = e => {
+  onLogoutClick = (e) => {
     e.preventDefault();
     this.props.logoutUser();
   };
@@ -13,30 +17,34 @@ class Dashboard extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
-        <div className="row">
-          <div className="landing-copy col s12 center-align">
-            <h4>
-              <b>Hey there,</b> {user.name.split(" ")[0]}
-              <p className="flow-text grey-text text-darken-1">
-                You are logged into a full-stack{" "}
-                <span style={{ fontFamily: "monospace" }}>MERN</span> app 👏
-              </p>
-            </h4>
+      <div>
+        <nav class="navbar navbar-dark white">
+          <div class="form-inline my-2 my-lg-0 ml-auto">
             <button
-              style={{
-                width: "150px",
-                borderRadius: "3px",
-                letterSpacing: "1.5px",
-                marginTop: "1rem"
-              }}
+              class="btn btn-outline-white btn-md my-2 my-sm-0 ml-3"
               onClick={this.onLogoutClick}
-              className="btn btn-large waves-effect waves-light hoverable blue accent-3"
             >
               Logout
             </button>
           </div>
-        </div>
+        </nav>
+        <div class="row">
+          <div class="col-md-8">
+            <div className="container">
+              {notes.map((note) => (
+                <ArticleCard title={note.about} link={note.link}>
+                  <Note
+                    author={note.author}
+                    description={note.description}
+                    date={note.date}
+                    category={note.category}
+                  />
+                </ArticleCard>
+              ))}
+            </div>
+          </div>
+        </div>{" "}
+        //row
       </div>
     );
   }
@@ -44,14 +52,11 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   logoutUser: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
 };
 
-const mapStateToProps = state => ({
-  auth: state.auth
+const mapStateToProps = (state) => ({
+  auth: state.auth,
 });
 
-export default connect(
-  mapStateToProps,
-  { logoutUser }
-)(Dashboard);
+export default connect(mapStateToProps, { logoutUser })(Dashboard);
