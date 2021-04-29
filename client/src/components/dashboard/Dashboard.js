@@ -32,12 +32,15 @@ class Dashboard extends Component {
           <div class="col-md-8">
             <div className="container">
               {notes.map((note) => (
-                <ArticleCard title={note.about} link={note.link}>
+                <ArticleCard
+                  title={note.Article_Title}
+                  link={note.Article_Link}
+                >
                   <Note
-                    author={note.author}
-                    description={note.description}
-                    date={note.date}
-                    category={note.category}
+                    author={note.Author}
+                    description={note.Description}
+                    date={note.Date}
+                    category={note.Topic}
                   />
                 </ArticleCard>
               ))}

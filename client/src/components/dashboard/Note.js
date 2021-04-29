@@ -3,7 +3,7 @@ import React from "react";
 function Note(props) {
   return (
     <div className="note">
-      <h1>{props.about}</h1>
+      <h1>{props.Article_Title}</h1>
       <p>{props.description} </p>
       <p>
         <b>
@@ -13,7 +13,7 @@ function Note(props) {
           {"Date: "}
           {props.date}
           {"    "}
-          {"category: "}
+          {"Topic: "}
           {props.category}
           {"    "}
         </b>

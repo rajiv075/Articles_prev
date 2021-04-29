@@ -7502,4 +7502,4 @@ const data = [
     Topic: "Cyber Security",
   },
 ];
-module.exports = data;
+module.exports = { data };
